@@ -1,0 +1,141 @@
+PROJECT
+I want to create an app and web app service focused on connecting influencers with users. The platform will allow users to directly chat, do audio calls, video calls, and engage in other interactive features with influencers. For each text, call, or video call, users will need to pay a fixed amount, which is set by the influencer. Influencers will operate through the mobile app, while users will use the web app.
+
+Each influencer will have their unique URL route, and users can visit these pages to chat, call, and more. However, users must first sign up or sign in if they already have an account and recharge their vault if there are insufficient funds. For each interaction—be it a message, audio call, or video call—the amount will be deducted from the user’s vault and added to the influencer’s vault. Influencers will be able to see the real-time balance of the user’s vault.
+
+🔹 Key Platform Structure
+Unique Influencer URLs: Each influencer will have a unique URL (e.g., www.example.com/influencer-name) to ensure users interact with only that specific influencer. To interact with a different influencer, users must visit their respective URL and register separately.
+
+Separate User & Influencer Experiences: The platform will have distinct dashboards for users and influencers, each with customized features. Users will access the platform through the web app, and influencers will use the mobile app, which should work on both iOS and Android.
+
+Authentication & Security: We will implement OAuth 2.0, JWT, or Firebase Authentication for secure login. Sessions will be securely managed, and influencers will have multi-factor authentication (MFA) enabled for added security.
+
+🔹 User Dashboard & Features
+1⃣ Secure Authentication & Profile Management
+
+Users must sign up or log in before accessing chat, audio, or video call features. Their credentials will be securely stored with encryption. They will also be able to customize their profile, including options for profile pictures, bios, and preferences.
+
+2⃣ Digital Wallet & Payment Integration
+
+The platform will have a digital wallet system where users can add money via Razorpay, Stripe, PayPal, UPI, or similar payment systems. The wallet balance will be updated in real time, showing transaction history and automatically deducting amounts when paying for services. If the user’s balance is insufficient for the minimum required time (e.g., 1 minute), chat/video call options will be disabled.
+
+3⃣ Slot Booking System
+
+Users will be able to book slots for future conversations, with a minimum duration of 5 minutes. If a slot is already booked, users will need to wait for availability. Real-time notifications will be sent for slot confirmations and reminders.
+
+4⃣ Real-Time Chat & Video Calls
+
+WebSockets will be used for real-time chat, and WebRTC-like features will be used for video calls. End-to-end encryption will ensure privacy. Users will have the option to store chat history for up to 10 days, share images, videos, and voice notes. They will also receive push notifications for new messages or scheduled calls.
+
+5⃣ Wallet Deduction & Refund Logic
+
+Booking & Initial Deduction Process: Whenever a user messages an influencer, they will be charged per message as decided by the influencer. For audio and video calls, users must first select the duration of the call (e.g., how many minutes they want). The user must have enough balance in their wallet to cover the total cost. When a user books a slot, the full amount for the selected duration will be temporarily locked in the user’s wallet.
+
+Session Deduction: For example, if a user wants to book a 10-minute video call at ₹20 per minute, ₹200 will be held in the user’s wallet. If the user does not have sufficient balance, they will not be able to proceed with booking the session.
+
+Wallet Deduction During Live Sessions: During the call, the system will deduct the amount from the user’s wallet at the start of the session. The chat window will remain open until the balance is exhausted. If the user has more credits, the call will continue. If the user runs out of credits, the call will be disconnected or the chat window will lock.
+
+Handling Call Disconnections & Grace Period: If the call disconnects unexpectedly, the system will allow the user a 30-second grace period to reconnect. If the user does not reconnect within 15 seconds, the system will apply specific refund and deduction logic. For instance, if the user disconnects early during a 5-minute call (e.g., after 3 minutes), the system will not deduct the full amount.
+
+Cancellations & No-Show Refund Policy: If the user cancels a session before it starts, a cancellation fee (typically 10%) will be charged, and the remaining amount will be refunded. If the influencer does not show up for the scheduled call, the user will receive a full refund. However, if the user does not show up for a scheduled session, no refund will be given.
+
+6⃣ Refund Process & Automated Updates
+
+Refunds will be automatically processed if the user disconnects early, or if the influencer doesn’t show up for a session. Refunds will be credited back to the user’s wallet immediately. The user cannot withdraw the refunded amount but can use it for future bookings. The transaction history will clearly show booking amounts, deductions, refunds, and the remaining balance.
+
+7⃣ Influencer Feed Section
+
+Users will have access to an influencer feed, where they can see posts (private images or videos with descriptions) uploaded by the influencer. These posts will be locked with a blur and a “locked” logo. To unlock the content, users must pay the amount set by the influencer. This will be a dedicated section in the user dashboard.
+
+8⃣ Booking Confirmations & Reminders
+
+Users will receive automated notifications when their booking is confirmed, and reminders 15-30 minutes before the session, sent over email.
+
+🔹 Influencer App Dashboard & Features
+1⃣ Separate Influencer Experience
+
+Influencers will have a unique app interface with full control over their availability, content, and earnings.
+
+2⃣ Booking & Availability Management
+
+Influencers will be able to set available time slots via a calendar view. They can accept, decline, or reschedule bookings. Once a slot is booked, it will be disabled for other users.
+
+3⃣ Direct Chat & Video Call Controls
+
+Influencers will have full control over starting, pausing, or ending a session. They will also have the option to block, mute, or report users if needed. If the user hasn’t connected yet, influencers can initiate the chat or call.
+
+4⃣ Earnings & Payout Management
+
+Influencers will have an earnings dashboard, allowing them to track revenue from chat/video calls or private images/videos. Automated payout systems will process transactions weekly or monthly via bank transfer, PayPal, or Stripe. The dashboard will display transaction history, commission breakdowns, and earnings analytics.
+
+5⃣ Privacy & Security Controls
+
+Influencers will have advanced privacy settings, including the ability to:
+
+Restrict certain users from booking slots
+
+Set visibility preferences for their images/posts (public, followers-only, or private)
+
+Enable AI moderation to detect inappropriate behavior in chat/video calls
+
+🔹 Additional Future Enhancements
+AI Chatbot Assistant: Engage users when influencers are offline.
+
+Virtual Gifting System: Users can send virtual gifts to influencers.
+
+Gamification & Leaderboard: Rank top users based on interactions and reward them with badges or perks.
+
+Screenshot/Screen Recording Prevention: Implement technology that blocks screenshots or screen recording during video calls, chats, and viewing locked content.
+
+🔹 UI Related Prompts
+Overall Aesthetic & Style Guide
+
+Modern & Interactive Design: The platform should have an engaging design, especially targeting influencers and their followers who might not be familiar with technical interfaces. It should use bright, energetic colors like pink, blue, and teal for important call-to-action elements.
+
+Minimalistic but Playful UI: The layout should remain simple but inject personality in key areas like buttons, the chat interface, and profile pages. The use of custom illustrations or playful characters should enhance the visual appeal.
+
+Responsive & Accessible: Ensure that the interface adapts well across different devices, ensuring a consistent user experience.
+
+Chatbot Design
+
+AI Chatbot Appearance: The chatbot should feel engaging and friendly, with cartoonish features such as expressive eyes, a light color palette, and fun animations.
+
+Positioning of the Chatbot: The chatbot icon should be positioned at the bottom right corner of the screen, where it’s easily visible but not intrusive.
+
+Chat Interface Design: Use rounded message bubbles for both user and bot messages. Incorporate quick reply buttons and typing animations for a more natural experience.
+
+Bot Avatar Images: Provide multiple avatars for the chatbot that match the platform's playful aesthetic.
+
+Also adding the sample structure
+/InfluencerPlatform
+├── /frontend
+│   ├── /user-webapp
+│   │   ├── /components
+│   │   ├── /pages
+│   │   ├── /assets
+│   │   ├── /styles
+│   │   └── /utils
+│   └── /influencer-app
+│       ├── /components
+│       ├── /screens
+│       ├── /assets
+│       ├── /styles
+│       └── /utils
+├── /backend
+│   ├── /controllers
+│   ├── /models
+│   ├── /routes
+│   ├── /middleware
+│   └── /services
+├── /payments
+│   ├── /razorpay
+│   ├── /stripe
+│   └── /paypal
+├── /security
+│   ├── /authentication
+│   ├── /authorization
+│   └── /data-encryption
+└── /tests
+    ├── /unit-tests
+    ├── /integration-tests
+    └── /e2e-tests
